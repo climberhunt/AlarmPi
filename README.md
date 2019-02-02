@@ -1,4 +1,4 @@
 # AlarmPi
 DIY Alarm system based on Raspberry Pi
 
-.. image:: 7.png
+![AlarmPi Nodes](https://raw.githubusercontent.com/climberhunt/AlarmPi/master/7.png)
