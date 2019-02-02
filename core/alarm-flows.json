@@ -1,0 +1,820 @@
+[
+  {
+    "id": "f1de4f0a.6e4b",
+    "type": "rpi-gpio in",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Hallway PIR",
+    "pin": "33",
+    "intype": "up",
+    "debounce": "25",
+    "read": true,
+    "x": 210,
+    "y": 300,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "3b7c5b42.c89e34",
+    "type": "rpi-gpio in",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Kitchen PIR",
+    "pin": "31",
+    "intype": "up",
+    "debounce": "25",
+    "read": true,
+    "x": 250,
+    "y": 340,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "7bed8b8d.002434",
+    "type": "rpi-gpio in",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Big TV PIR",
+    "pin": "32",
+    "intype": "up",
+    "debounce": "25",
+    "read": true,
+    "x": 80,
+    "y": 380,
+    "wires": [
+      [
+        "9cbdec1e.ae30c"
+      ]
+    ]
+  },
+  {
+    "id": "d2e7d8df.b1a978",
+    "type": "rpi-gpio in",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Small TV PIR",
+    "pin": "35",
+    "intype": "up",
+    "debounce": "25",
+    "read": true,
+    "x": 130,
+    "y": 420,
+    "wires": [
+      [
+        "b746ab7c.f548b8"
+      ]
+    ]
+  },
+  {
+    "id": "80c3b8ec.a4b9b8",
+    "type": "rpi-gpio in",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Utility PIR",
+    "pin": "36",
+    "intype": "up",
+    "debounce": "25",
+    "read": true,
+    "x": 160,
+    "y": 460,
+    "wires": [
+      [
+        "f33afd35.4a907"
+      ]
+    ]
+  },
+  {
+    "id": "770007c7.4573b8",
+    "type": "rpi-gpio out",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Siren GPIO On/Off",
+    "pin": "13",
+    "set": "",
+    "level": "0",
+    "out": "out",
+    "x": 1490,
+    "y": 580,
+    "wires": []
+  },
+  {
+    "id": "983d4d1f.daf1f",
+    "type": "inject",
+    "z": "3c4bb19.50ebd4e",
+    "name": "1 - On",
+    "topic": "",
+    "payload": "1",
+    "payloadType": "num",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 110,
+    "y": 720,
+    "wires": [
+      [
+        "2a2517c0.a5f708"
+      ]
+    ]
+  },
+  {
+    "id": "9315c0ef.fc855",
+    "type": "inject",
+    "z": "3c4bb19.50ebd4e",
+    "name": "0 - Off",
+    "topic": "",
+    "payload": "0",
+    "payloadType": "num",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 110,
+    "y": 760,
+    "wires": [
+      [
+        "2a2517c0.a5f708"
+      ]
+    ]
+  },
+  {
+    "id": "2a2517c0.a5f708",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Set State",
+    "func": "global.set('alarm_set_state', msg.payload);\nglobal.set('siren_state', msg.payload);\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 260,
+    "y": 760,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "946a7648.fe5e68",
+    "type": "comment",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Instant Alarm",
+    "info": "",
+    "x": 130,
+    "y": 680,
+    "wires": []
+  },
+  {
+    "id": "77ec2d8b.207a64",
+    "type": "comment",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Per Second Updates",
+    "info": "",
+    "x": 750,
+    "y": 480,
+    "wires": []
+  },
+  {
+    "id": "7e5b0371.71d50c",
+    "type": "comment",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Sensor Inputs",
+    "info": "",
+    "x": 90,
+    "y": 140,
+    "wires": []
+  },
+  {
+    "id": "59967c33.65f3c4",
+    "type": "exec",
+    "z": "3c4bb19.50ebd4e",
+    "command": "/usr/bin/python /home/pi/sms.py",
+    "addpay": true,
+    "append": "",
+    "useSpawn": "",
+    "timer": "",
+    "name": "Send SMS",
+    "x": 1450,
+    "y": 400,
+    "wires": [
+      [
+        "aafde9cf.bd2b48"
+      ],
+      [],
+      []
+    ]
+  },
+  {
+    "id": "aafde9cf.bd2b48",
+    "type": "debug",
+    "z": "3c4bb19.50ebd4e",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "payload",
+    "x": 1630,
+    "y": 400,
+    "wires": []
+  },
+  {
+    "id": "d8ec7e3d.3cb79",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "SMS",
+    "func": "var open_list = global.get('open_list') || \"\";\nvar send_sms = parseInt(msg.payload.send_sms) || 0;\nvar alarm_set_state = global.get('alarm_set_state') || 0;\n\nif (send_sms == 1) {\n    msg.payload = '\"Alarm Activated\\nReason - ' + open_list + '\"'\n    return msg;\n}\n\nif (msg.topic == \"set\") {\n    msg.payload = '\"Alarm Set\"'\n    return msg;\n}\n\nif (msg.topic == \"unset\") {\n    msg.payload = '\"Alarm Unset\"'\n    return msg;\n}\n\nreturn null;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 1270,
+    "y": 440,
+    "wires": [
+      [
+        "180d2d11.ebede3",
+        "48d096dc.c4e3f8",
+        "59967c33.65f3c4"
+      ]
+    ]
+  },
+  {
+    "id": "180d2d11.ebede3",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "LogEntry",
+    "func": "var s_date = new Date().toString();\n\nmsg.payload = s_date + ' ' + msg.payload;\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 1440,
+    "y": 500,
+    "wires": [
+      [
+        "6a9b8416.d0609c"
+      ]
+    ]
+  },
+  {
+    "id": "48d096dc.c4e3f8",
+    "type": "debug",
+    "z": "3c4bb19.50ebd4e",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 1450,
+    "y": 460,
+    "wires": []
+  },
+  {
+    "id": "2746da48.666d56",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Alarm State Machine",
+    "func": "\nvar current_state = global.get('current_state') || \"unset\";\nvar next_state = global.get('next_state') || \"unset\";\nvar state_timer = global.get('state_timer') || \"0\";\nvar siren_state = global.get('siren_state') || 0;\nvar sms_msg = { topic:\"empty\", payload:{\"send_sms\":0 } };\n\nvar pin = 0;\nvar trigger = 0;\nvar delayed_trigger = 0;\nvar immediate_trigger = 0;\n\ncurrent_state = next_state;\n\n// We've got a good PIN entry.\nif (msg.payload.type == \"pin\")\n    pin = 1;\n\n// =============================================================================\n// Now get the staus of each of the sensors, and build a list of all triggered.\n// =============================================================================\nvar reed_sensors   = global.get('reed_sensors')   || 0;\nvar shock_sensors  = global.get('shock_sensors')  || 0;\nvar office_pir     = global.get('office_pir')     || 0;\nvar hallway_pir    = global.get('hallway_pir')    || 0;\nvar backdoor_reed  = global.get('backdoor_reed')  || 0;\nvar frontdoor_reed = global.get('frontdoor_reed') || 0;\nvar kitchen_pir    = global.get('kitchen_pir')    || 0;\nvar big_tv_pir     = global.get('big_tv_pir')     || 0;\nvar small_tv_pir   = global.get('small_tv_pir')   || 0;\nvar utility_pir    = global.get('utility_pir')    || 0;\nvar panel_tamper   = global.get('panel_tamper')   || 0;\nvar siren_tamper   = global.get('siren_tamper')   || 0;\n\nvar open_list = \"\";\n\nif (reed_sensors==1)\n    open_list = open_list + \"reed sensors \";\nif (shock_sensors==1)\n    open_list = open_list + \"shock sensors \";\nif (office_pir==1)\n    open_list = open_list + \"office movement \";\nif (hallway_pir==1)\n    open_list = open_list + \"hallway movement \";\nif (backdoor_reed==1)\n    open_list = open_list + \"back door \";\nif (frontdoor_reed==1)\n    open_list = open_list + \"front door \";\nif (kitchen_pir==1)\n    open_list = open_list + \"kitchen movement \";\nif (big_tv_pir==1)\n    open_list = open_list + \"big tv room \";\nif (small_tv_pir==1)\n    open_list = open_list + \"small tv room \";\nif (utility_pir==1)\n    open_list = open_list + \"utility movement \";\n    if (panel_tamper==1)\n    open_list = open_list + \"panel tamper \";\nif (siren_tamper==1)\n    open_list = open_list + \"siren tamper \";\n\nglobal.set('open_list', open_list);\n\n\nif ((msg.payload.type == \"reed\") || (msg.payload.type == \"pir\") ||\n        (msg.payload.type == \"shock\") || (msg.payload.type == \"switch\")) {\n    if ((msg.payload.value==1) && (msg.payload.trigger_delayed===0)) {\n        trigger = 1;\n    }\n    if ((msg.payload.value==1) && (msg.payload.trigger_delayed==1)) {\n        delayed_trigger = 1;\n    }\n    if ((msg.payload.value==1) && (msg.payload.trigger_when_unset==1)) {\n        // Go immediately to alarm state, do not pass go, do not collect $200\n        // This is the only place outside of the state machine that can set the\n        // state, because the immediate trigger of the tamper switches is a \n        // special case, we need to go straight to alarm.\n        immediate_trigger = 1;\n        current_state = alarm;\n        state_timer = 0;\n        sms_msg = { topic:\"alarm\", payload:{\"send_sms\":1 } };\n    }\n}\n\nif (state_timer>0)\n    state_timer = state_timer - 1;\n\n\n\n\n\n// =============================================================================\n// Here's the state machine. THere are five states in all. \n// unset     - only looking for tamper triggers\n// unsetting - countdown to unset, if front/back door triggerred. Awaiting Pin.\n// set       - awaiting a trigger to go to alarm state\n// setting   - countdown to set once pin has been entered.\n// alarm     - alarm state, sends sms, activates siren.\n// =============================================================================\n\nif (current_state == \"unset\") {\n    node.status({fill:\"green\", shape:\"dot\", text:\"Unset\"});\n    siren_state = 0;\n    if (pin == 1) {\n        // The PIN has been successfully entered.\n        if (open_list === \"\") {\n            next_state = \"setting\";\n            state_timer = 10;\n        } else {\n            next_state = \"set_fail\";\n            state_timer = 10;\n        }\n    }\n} else if (current_state == \"set_fail\") {\n    node.status({fill:\"orange\", shape:\"dot\", text:state_timer});\n    next_state = \"unset\";\n    state_timer = 0;\n} else if (current_state == \"setting\") {\n    node.status({fill:\"blue\", shape:\"dot\", text:state_timer});\n    if (state_timer == 1) {\n        next_state = \"set\";\n        sms_msg = { topic:\"set\", payload:{\"send_sms\":2 } };\n    }\n    if (pin == 1) {\n        // The PIN has been successfully entered.\n        next_state = \"unset\";\n        sms_msg = { topic:\"unset\", payload:{\"send_sms\":2 } };\n        state_timer = 0;\n    }\n\n} else if (current_state == \"set\") {\n    node.status({fill:\"amber\", shape:\"dot\", text:\"Set\"});\n    if (trigger == 1) {\n        next_state = \"alarm\";\n        sms_msg = { topic:\"alarm\", payload:{\"send_sms\":1 } };\n    }\n    if (delayed_trigger == 1) {\n        next_state = \"unsetting\";\n        state_timer = 30;\n    }\n    if (pin == 1) {\n        // The PIN has been successfully entered.\n        next_state = \"unset\";\n        sms_msg = { topic:\"unset\", payload:{\"send_sms\":2 } };\n        state_timer = 0;\n    }\n\n} else if (current_state == \"unsetting\") {\n    node.status({fill:\"blue\", shape:\"dot\", text:state_timer});\n    if (state_timer == 1) {\n        // The PIN has not been entered in time, go to alarm state\n        next_state = \"alarm\";\n        sms_msg = { topic:\"alarm\", payload:{\"send_sms\":1 } };\n    }\n    if (pin == 1) {\n        // The PIN has been successfully entered.\n        next_state = \"unset\";\n        sms_msg = { topic:\"unset\", payload:{\"send_sms\":2 } };\n        state_timer = 0;\n    }\n\n} else if (current_state == \"alarm\") {\n    node.status({fill:\"red\", shape:\"dot\", text:\"Alarm!!!\"});\n    siren_state = 1;\n    if (pin == 1) {\n        // The PIN has been successfully entered.\n        next_state = \"unset\";\n        sms_msg = { topic:\"unset\", payload:{\"send_sms\":2 } };\n        state_timer = 0;\n    }\n\n}\nmsg.payload = {\n    \"timer\": state_timer,\n    \"status\": current_state,\n    \"next_state\": next_state,\n    \"open_list\": open_list\n};\n\nglobal.set('current_state', current_state);\nglobal.set('next_state', next_state);\nglobal.set('state_timer', state_timer);\nglobal.set('siren_state', siren_state);\n\nreturn [ msg, sms_msg ];\n\n",
+    "outputs": "2",
+    "noerr": 0,
+    "x": 1020,
+    "y": 380,
+    "wires": [
+      [
+        "50668f58.c13ed",
+        "4a2e6cc6.739984"
+      ],
+      [
+        "d8ec7e3d.3cb79"
+      ]
+    ]
+  },
+  {
+    "id": "f813d681.d0af88",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "passthrough",
+    "func": "return msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 690,
+    "y": 380,
+    "wires": [
+      [
+        "2746da48.666d56"
+      ]
+    ]
+  },
+  {
+    "id": "6a9b8416.d0609c",
+    "type": "file",
+    "z": "3c4bb19.50ebd4e",
+    "name": "LogFile",
+    "filename": "/home/pi/alarm.log",
+    "appendNewline": true,
+    "createDir": false,
+    "overwriteFile": "false",
+    "x": 1600,
+    "y": 500,
+    "wires": []
+  },
+  {
+    "id": "50668f58.c13ed",
+    "type": "debug",
+    "z": "3c4bb19.50ebd4e",
+    "name": "",
+    "active": false,
+    "console": "false",
+    "complete": "false",
+    "x": 1290,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "b5f3f27a.ba099",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Validate PIN",
+    "func": "\nvar alarm_set_state = global.get('alarm_set_state') || 0;\nvar countdown = global.get('countdown') || 0;\n\nvar pin = msg.payload.pin_code;\n\nif (pin == \"123456\") {\n    msg.payload = { \n    \"type\": \"pin\",\n    \"value\": 1 };\n} else {\n    msg.payload = null;\n}\n\nreturn msg;",
+    "outputs": "1",
+    "noerr": 0,
+    "x": 790,
+    "y": 100,
+    "wires": [
+      [
+        "2746da48.666d56"
+      ]
+    ]
+  },
+  {
+    "id": "df06740a.52b1f8",
+    "type": "inject",
+    "z": "3c4bb19.50ebd4e",
+    "name": "",
+    "topic": "",
+    "payload": "{\"type\": \"counter\"}",
+    "payloadType": "json",
+    "repeat": "1",
+    "crontab": "",
+    "once": false,
+    "x": 750,
+    "y": 520,
+    "wires": [
+      [
+        "2746da48.666d56",
+        "f9a1f3e7.71954"
+      ]
+    ]
+  },
+  {
+    "id": "6b3cb579.ab725c",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "passthrough",
+    "func": "return msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 1270,
+    "y": 580,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "631d46f5.85f3f8",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Sensor Settings",
+    "func": "global.set('office_pir', msg.payload);\n\nmsg.payload = { \n    \"type\": \"pir\",\n    \"name\": \"Office PIR\",\n    \"enabled\": 1,\n    \"set_when_open\": 0,\n    \"trigger_delayed\": 0,\n    \"value\": msg.payload };\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 440,
+    "y": 260,
+    "wires": [
+      [
+        "f813d681.d0af88"
+      ]
+    ]
+  },
+  {
+    "id": "fa89129.ce1f1f",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Sensor Settings",
+    "func": "global.set('hallway_pir', msg.payload);\n\nmsg.payload = { \n    \"type\": \"pir\",\n    \"name\": \"Hallway PIR\",\n    \"enabled\": 1,\n    \"set_when_open\": 0,\n    \"trigger_delayed\": 1,\n    \"value\": msg.payload };\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 440,
+    "y": 300,
+    "wires": [
+      [
+        "f813d681.d0af88"
+      ]
+    ]
+  },
+  {
+    "id": "c204a426.ca2cd8",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Sensor Settings",
+    "func": "global.set('shock_sensors', msg.payload);\n\nmsg.payload = { \n    \"type\": \"shock\",\n    \"name\": \"Shock Sensors\",\n    \"enabled\": 1,\n    \"set_when_open\": 0,\n    \"trigger_delayed\": 1,\n    \"value\": msg.payload };\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 440,
+    "y": 220,
+    "wires": [
+      [
+        "f813d681.d0af88"
+      ]
+    ]
+  },
+  {
+    "id": "8707a4d.f721558",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Sensor Settings",
+    "func": "global.set('reed_sensors', msg.payload);\n\nmsg.payload = { \n    \"type\": \"reed\",\n    \"name\": \"Reed Sensors\",\n    \"enabled\": 1,\n    \"set_when_open\": 0,\n    \"trigger_delayed\": 1,\n    \"value\": msg.payload };\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 440,
+    "y": 180,
+    "wires": [
+      [
+        "f813d681.d0af88"
+      ]
+    ]
+  },
+  {
+    "id": "3229be0b.81c372",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Sensor Settings",
+    "func": "global.set('backdoor_reed', msg.payload);\n\nmsg.payload = { \n    \"type\": \"reed\",\n    \"name\": \"Back Door\",\n    \"enabled\": 1,\n    \"set_when_open\": 0,\n    \"trigger_delayed\": 1,\n    \"value\": msg.payload };\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 440,
+    "y": 620,
+    "wires": [
+      [
+        "f813d681.d0af88"
+      ]
+    ]
+  },
+  {
+    "id": "4cc540c0.d0811",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Sensor Settings",
+    "func": "global.set('frontdoor_reed', msg.payload);\n\nmsg.payload = { \n    \"type\": \"reed\",\n    \"name\": \"Front Door\",\n    \"enabled\": 1,\n    \"set_when_open\": 1,\n    \"trigger_delayed\": 1,\n    \"value\": msg.payload };\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 440,
+    "y": 580,
+    "wires": [
+      [
+        "f813d681.d0af88"
+      ]
+    ]
+  },
+  {
+    "id": "500e8767.53b6d8",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Sensor Settings",
+    "func": "global.set('panel_tamper', msg.payload);\n\nmsg.payload = { \n    \"type\": \"switch\",\n    \"name\": \"Panel Tamper\",\n    \"enabled\": 1,\n    \"set_when_open\": 0,\n    \"trigger_delayed\": 0,\n    \"trigger_when_unset\": 1,\n    \"value\": msg.payload };\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 440,
+    "y": 500,
+    "wires": [
+      [
+        "f813d681.d0af88"
+      ]
+    ]
+  },
+  {
+    "id": "77d4c2d5.c581ec",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Sensor Settings",
+    "func": "global.set('siren_tamper', msg.payload);\n\nmsg.payload = { \n    \"type\": \"switch\",\n    \"name\": \"Siren Tamper\",\n    \"enabled\": 1,\n    \"set_when_open\": 0,\n    \"trigger_delayed\": 0,\n    \"trigger_when_unset\": 1,\n    \"value\": msg.payload };\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 440,
+    "y": 540,
+    "wires": [
+      [
+        "f813d681.d0af88"
+      ]
+    ]
+  },
+  {
+    "id": "24ad81f1.3f978e",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Sensor Settings",
+    "func": "global.set('kitchen_pir', msg.payload);\n\nmsg.payload = { \n    \"type\": \"pir\",\n    \"name\": \"Kitchen PIR\",\n    \"enabled\": 1,\n    \"set_when_open\": 0,\n    \"trigger_delayed\": 1,\n    \"value\": msg.payload };\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 440,
+    "y": 340,
+    "wires": [
+      [
+        "f813d681.d0af88"
+      ]
+    ]
+  },
+  {
+    "id": "9cbdec1e.ae30c",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Sensor Settings",
+    "func": "global.set('big_tv_pir', msg.payload);\n\nmsg.payload = { \n    \"type\": \"pir\",\n    \"name\": \"Big TV PIR\",\n    \"enabled\": 1,\n    \"set_when_open\": 0,\n    \"trigger_delayed\": 0,\n    \"value\": msg.payload };\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 440,
+    "y": 380,
+    "wires": [
+      [
+        "f813d681.d0af88"
+      ]
+    ]
+  },
+  {
+    "id": "b746ab7c.f548b8",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Sensor Settings",
+    "func": "global.set('small_tv_pir', msg.payload);\n\nmsg.payload = { \n    \"type\": \"pir\",\n    \"name\": \"Small TV PIR\",\n    \"enabled\": 1,\n    \"set_when_open\": 0,\n    \"trigger_delayed\": 0,\n    \"value\": msg.payload };\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 440,
+    "y": 420,
+    "wires": [
+      [
+        "f813d681.d0af88"
+      ]
+    ]
+  },
+  {
+    "id": "f33afd35.4a907",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Sensor Settings",
+    "func": "global.set('utility_pir', msg.payload);\n\nmsg.payload = { \n    \"type\": \"pir\",\n    \"name\": \"Utility PIR\",\n    \"enabled\": 1,\n    \"set_when_open\": 0,\n    \"trigger_delayed\": 0,\n    \"value\": msg.payload };\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 440,
+    "y": 460,
+    "wires": [
+      [
+        "f813d681.d0af88"
+      ]
+    ]
+  },
+  {
+    "id": "8d08e672.51e758",
+    "type": "ui_form",
+    "z": "3c4bb19.50ebd4e",
+    "name": "",
+    "label": "",
+    "group": "5ad387dd.ff2f38",
+    "order": 0,
+    "width": "0",
+    "height": "0",
+    "options": [
+      {
+        "label": "Pin Code",
+        "value": "pin_code",
+        "type": "number",
+        "required": true
+      }
+    ],
+    "formValue": {
+      "pin_code": ""
+    },
+    "payload": "",
+    "topic": "",
+    "x": 610,
+    "y": 140,
+    "wires": [
+      [
+        "b5f3f27a.ba099"
+      ]
+    ]
+  },
+  {
+    "id": "9e5efc10.7d5c7",
+    "type": "inject",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Inject PinCode",
+    "topic": "",
+    "payload": "{\"pin_code\":123456}",
+    "payloadType": "json",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 580,
+    "y": 60,
+    "wires": [
+      [
+        "b5f3f27a.ba099"
+      ]
+    ]
+  },
+  {
+    "id": "3a2b4c53.a52274",
+    "type": "json",
+    "z": "3c4bb19.50ebd4e",
+    "name": "",
+    "x": 610,
+    "y": 100,
+    "wires": [
+      [
+        "b5f3f27a.ba099"
+      ]
+    ]
+  },
+  {
+    "id": "f9a1f3e7.71954",
+    "type": "function",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Siren On/Off",
+    "func": "msg.payload = global.get('siren_state') || 0;\n//msg.payload = 0;\nif (msg.payload == 1)\n    node.status({fill:\"red\", shape:\"dot\", text:msg.payload});\nelse\n    node.status({fill:\"green\", shape:\"dot\", text:msg.payload});\nreturn msg;\n",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 1030,
+    "y": 580,
+    "wires": [
+      [
+        "6b3cb579.ab725c"
+      ]
+    ]
+  },
+  {
+    "id": "ed189706.99f708",
+    "type": "rpi-gpio in",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Office PIR",
+    "pin": "29",
+    "intype": "up",
+    "debounce": "25",
+    "read": true,
+    "x": 160,
+    "y": 260,
+    "wires": [
+      [
+        "631d46f5.85f3f8"
+      ]
+    ]
+  },
+  {
+    "id": "f80b1f9e.17caf",
+    "type": "rpi-gpio in",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Shocks",
+    "pin": "5",
+    "intype": "up",
+    "debounce": "25",
+    "read": true,
+    "x": 110,
+    "y": 220,
+    "wires": [
+      [
+        "c204a426.ca2cd8"
+      ]
+    ]
+  },
+  {
+    "id": "215e5a9f.875396",
+    "type": "rpi-gpio in",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Reeds",
+    "pin": "3",
+    "intype": "up",
+    "debounce": "25",
+    "read": true,
+    "x": 70,
+    "y": 180,
+    "wires": [
+      [
+        "8707a4d.f721558"
+      ]
+    ]
+  },
+  {
+    "id": "c4ccf263.430ca",
+    "type": "rpi-gpio in",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Back Door Reed",
+    "pin": "12",
+    "intype": "up",
+    "debounce": "25",
+    "read": true,
+    "x": 140,
+    "y": 620,
+    "wires": [
+      [
+        "3229be0b.81c372"
+      ]
+    ]
+  },
+  {
+    "id": "668402da.f8bfdc",
+    "type": "rpi-gpio in",
+    "z": "3c4bb19.50ebd4e",
+    "name": "FrontDoor Reed",
+    "pin": "7",
+    "intype": "up",
+    "debounce": "25",
+    "read": true,
+    "x": 100,
+    "y": 580,
+    "wires": [
+      [
+        "4cc540c0.d0811"
+      ]
+    ]
+  },
+  {
+    "id": "b3376ff9.7facd",
+    "type": "rpi-gpio in",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Panel Tamper",
+    "pin": "16",
+    "intype": "up",
+    "debounce": "25",
+    "read": true,
+    "x": 210,
+    "y": 500,
+    "wires": [
+      [
+        "500e8767.53b6d8"
+      ]
+    ]
+  },
+  {
+    "id": "519781b3.e8c85",
+    "type": "rpi-gpio in",
+    "z": "3c4bb19.50ebd4e",
+    "name": "Siren Tamper",
+    "pin": "15",
+    "intype": "up",
+    "debounce": "25",
+    "read": true,
+    "x": 250,
+    "y": 540,
+    "wires": [
+      [
+        "77d4c2d5.c581ec"
+      ]
+    ]
+  },
+  {
+    "id": "43c8b2cd.ab2d6c",
+    "type": "mqtt in",
+    "z": "3c4bb19.50ebd4e",
+    "name": "",
+    "topic": "alarm_pin",
+    "qos": "2",
+    "broker": "ce68ef29.ba9eb",
+    "x": 460,
+    "y": 100,
+    "wires": [
+      [
+        "3a2b4c53.a52274"
+      ]
+    ]
+  },
+  {
+    "id": "4a2e6cc6.739984",
+    "type": "mqtt out",
+    "z": "3c4bb19.50ebd4e",
+    "name": "",
+    "topic": "alarm_status",
+    "qos": "",
+    "retain": "",
+    "broker": "ce68ef29.ba9eb",
+    "x": 1290,
+    "y": 320,
+    "wires": []
+  },
+  {
+    "id": "5ad387dd.ff2f38",
+    "type": "ui_group",
+    "z": "",
+    "name": "alarm_code",
+    "tab": "24e21661.f1291a",
+    "disp": false,
+    "width": "6"
+  },
+  {
+    "id": "ce68ef29.ba9eb",
+    "type": "mqtt-broker",
+    "z": "",
+    "broker": "10.4.11.16",
+    "port": "1883",
+    "clientid": "",
+    "usetls": false,
+    "compatmode": true,
+    "keepalive": "60",
+    "cleansession": true,
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": "",
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthPayload": ""
+  },
+  {
+    "id": "24e21661.f1291a",
+    "type": "ui_tab",
+    "z": "",
+    "name": "Home",
+    "icon": "dashboard"
+  }
+]
