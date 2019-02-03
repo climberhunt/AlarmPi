@@ -796,7 +796,7 @@
     "id": "ce68ef29.ba9eb",
     "type": "mqtt-broker",
     "z": "",
-    "broker": "10.4.11.16",
+    "broker": "10.10.10.10",
     "port": "1883",
     "clientid": "",
     "usetls": false,
